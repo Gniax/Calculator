@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QPushButton>
 
-class CTouchesOp : public QWidget
+class CTouchesOp : public QPushButton
 {
     Q_OBJECT
 public:
@@ -13,12 +13,12 @@ public:
 
     //Méthodes
     CTouchesOp(QString uneOp, QWidget *parent = 0);
-    emitClicked();
-    clickedToucheOp(QChar opTouche);
 
 signals:
+    clickedToucheOp(QChar opTouche);
 
 public slots:
+    emitClicked();
 };
 
 #endif // CTOUCHESOP_H

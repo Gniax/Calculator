@@ -19,24 +19,23 @@ class Calculatrice : public QMainWindow
 public:
     explicit Calculatrice(QWidget *parent = 0);
     ~Calculatrice();
-    traiteAppuiOp(QChar uneToucheOp);
 
 private:
-    Ui::Calculatrice *ui;
     traiteCalcul();
     CToucheNum *mesTouchesNum[11];
     CTouchesOp *mesTouchesOp[6];
-    QLCDNumber monAfficheur;
+    QLCDNumber *monAfficheur;
     QGridLayout monLayout;
     float maValOp1;
     float maValOp2;
-    QString maStrOp1;
-    QString maStrOp2;
+    QString *maStrOp1;
+    QString *maStrOp2;
     bool monOp1;
-    char monOp;
+    QChar monOp;
 
 public slots:
-    void traiteAppuiNum(QChar);
+    void traiteAppuiNum(QChar uneToucheNum);
+    void traiteAppuiOp(QChar uneToucheOp);
 
 };
 
