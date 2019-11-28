@@ -44,7 +44,7 @@ Calculatrice::Calculatrice(QWidget *parent) : QMainWindow(parent)
     mesTouchesOp[5] = new CTouchesOp("AC", this);
     connect(mesTouchesOp[5], SIGNAL(clickedToucheOp(QChar)), this, SLOT(traiteAppuiOp(QChar)));
 
-    QLCDNumber *monAfficheur = new QLCDNumber(this);
+    monAfficheur = new QLCDNumber(this);
     monAfficheur->setFixedSize(275, 75);
 
     //0th row
@@ -93,7 +93,7 @@ Calculatrice::~Calculatrice()
 
 void Calculatrice::traiteAppuiNum(QChar uneValNum)
 {
-    if(monOp1)
+    if(monOp1 == true)
     {
         maStrOp1->append(uneValNum);
         monAfficheur->display(*maStrOp1);
@@ -109,10 +109,19 @@ void Calculatrice::traiteAppuiOp(QChar uneToucheOp)
 {
     monOp = uneToucheOp;
     monOp1 = false;
-    monAfficheur->display(monOp);
-    if(uneToucheOp == '=' && *maStrOp1 != "" && *maStrOp2 != "")
+    if(uneToucheOp == 'AC')
     {
-        traiteCalcul();
+        monOp = '\x0';
+        monOp1 = true;
+        monAfficheur->display('0');
+    }
+    else
+    {
+        monAfficheur->display(monOp);
+        if(uneToucheOp == '=' && *maStrOp1 != "" && *maStrOp2 != "")
+        {
+            traiteCalcul();
+        }
     }
 
 }
