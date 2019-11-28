@@ -13,10 +13,12 @@ public:
 
     //Méthodes
     CToucheNum(QString unNum, QWidget *w);
-    emitClicked();
 
 signals:
-    clickedToucheNum(QChar numTouche);
+    clickedToucheNum(QChar);
+
+public slots:
+    emitClicked();
 };
 
 #endif // CTOUCHENUM_H

@@ -2,14 +2,16 @@
 #include <QPushButton>
 #include "calculatrice.h"
 #include <iostream>
+#include <QDebug>
 
 CToucheNum::CToucheNum(QString unNum, QWidget *w): QPushButton(unNum, w)
 {
-    //connect(this,SIGNAL (clickedToucheNum(QChar)), this->parent(), SLOT (Calculatrice::traiteAppuiNum(QChar)));
+    sonNum = unNum;
+    connect(this, SIGNAL(clicked()), this, SLOT (emitClicked()));
 }
 
 CToucheNum::emitClicked()
 {
-
+    emit(clickedToucheNum(sonNum.at(0)));
 }
 

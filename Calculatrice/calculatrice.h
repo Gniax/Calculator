@@ -36,7 +36,7 @@ private:
     char monOp;
 
 public slots:
-    void traiteAppuiNum();
+    void traiteAppuiNum(QChar);
 
 };
 

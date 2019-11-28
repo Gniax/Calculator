@@ -6,39 +6,33 @@
 
 Calculatrice::Calculatrice(QWidget *parent) : QMainWindow(parent)
 {
-    QGridLayout *gridLayout = new QGridLayout();
+    QGridLayout *monLayout = new QGridLayout();
 
-    mesTouchesNum[0] = new CToucheNum("0", this);
-        connect(mesTouchesNum[0], SIGNAL(clicked()), this, SLOT(traiteAppuiNum()));
-
-    mesTouchesNum[1] = new CToucheNum("1", this);
-    mesTouchesNum[2] = new CToucheNum("2", this);
-    mesTouchesNum[3] = new CToucheNum("3", this);
-    mesTouchesNum[4] = new CToucheNum("4", this);
-    mesTouchesNum[5] = new CToucheNum("5", this);
-    mesTouchesNum[6] = new CToucheNum("6", this);
-    mesTouchesNum[7] = new CToucheNum("7", this);
-    mesTouchesNum[8] = new CToucheNum("8", this);
-    mesTouchesNum[9] = new CToucheNum("9", this);
+    for(int i=0; i <10;i++)
+    {
+        QString iChar = QString::number(i);
+        mesTouchesNum[i] = new CToucheNum(iChar, this);
+        connect(mesTouchesNum[i], SIGNAL(clickedToucheNum(QChar)), this, SLOT(traiteAppuiNum(QChar)));
+    }
     mesTouchesNum[10] = new CToucheNum(".", this);
 
     //0th row
-    gridLayout->addWidget(mesTouchesNum[1],0,0,1,1);
-    gridLayout->addWidget(mesTouchesNum[2],0,1,1,1);
-    gridLayout->addWidget(mesTouchesNum[3],0,2,1,1);
+    monLayout->addWidget(mesTouchesNum[1],0,0,1,1);
+    monLayout->addWidget(mesTouchesNum[2],0,1,1,1);
+    monLayout->addWidget(mesTouchesNum[3],0,2,1,1);
 
     //1th row
-    gridLayout->addWidget(mesTouchesNum[4],1,0,1,1);
-    gridLayout->addWidget(mesTouchesNum[5],1,1,1,1);
-    gridLayout->addWidget(mesTouchesNum[6],1,2,1,1);
+    monLayout->addWidget(mesTouchesNum[4],1,0,1,1);
+    monLayout->addWidget(mesTouchesNum[5],1,1,1,1);
+    monLayout->addWidget(mesTouchesNum[6],1,2,1,1);
 
     //2th row
-    gridLayout->addWidget(mesTouchesNum[7],2,0,1,1);
-    gridLayout->addWidget(mesTouchesNum[8],2,1,1,1);
-    gridLayout->addWidget(mesTouchesNum[9],2,2,1,1);
+    monLayout->addWidget(mesTouchesNum[7],2,0,1,1);
+    monLayout->addWidget(mesTouchesNum[8],2,1,1,1);
+    monLayout->addWidget(mesTouchesNum[9],2,2,1,1);
 
-    gridLayout->addWidget(mesTouchesNum[0],3,0,1,1);
-    gridLayout->addWidget(mesTouchesNum[10],3,1,1,1);
+    monLayout->addWidget(mesTouchesNum[0],3,0,1,1);
+    monLayout->addWidget(mesTouchesNum[10],3,1,1,1);
     // 2nd row with 2-column span
     //gridLayout->addWidget(b5,2,0,1,2);
 
@@ -56,7 +50,7 @@ Calculatrice::Calculatrice(QWidget *parent) : QMainWindow(parent)
 
     //monAfficheur = new QLCDNumber(this);
 
-    w->setLayout(gridLayout);
+    w->setLayout(monLayout);
     w->setWindowTitle("Calculatrice");
     w->setFixedSize(300,500);
     w->show();
@@ -67,14 +61,14 @@ Calculatrice::~Calculatrice()
 
 }
 
-void Calculatrice::traiteAppuiNum()
+void Calculatrice::traiteAppuiNum(QChar val)
 {
     CToucheNum* pButton = qobject_cast<CToucheNum*>(sender());
-        if (pButton) // this is the type we expect
-        {
-            QString buttonText = pButton->text();
-            qInfo() << "test " << buttonText;
-        }
+    if (pButton)
+    {
+        QString buttonText = pButton->text();
+        qInfo() << "test " << buttonText;
+    }
 }
 
 Calculatrice::traiteAppuiOp(QChar uneToucheOp)
