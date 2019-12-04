@@ -1,8 +1,4 @@
 #include "ctouchenum.h"
-#include <QPushButton>
-#include "calculatrice.h"
-#include <iostream>
-#include <QDebug>
 
 CToucheNum::CToucheNum(QString unNum, QWidget *w): QPushButton(unNum, w)
 {
